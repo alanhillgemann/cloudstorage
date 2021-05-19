@@ -9,7 +9,6 @@ import java.util.Base64;
 
 @Service
 public class UserService {
-
     private final UserMapper userMapper;
     private final HashService hashService;
 
