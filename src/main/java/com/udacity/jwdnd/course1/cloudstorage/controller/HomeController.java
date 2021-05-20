@@ -1,7 +1,10 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
+import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
+import com.udacity.jwdnd.course1.cloudstorage.service.CredentialService;
+import com.udacity.jwdnd.course1.cloudstorage.service.EncryptionService;
 import com.udacity.jwdnd.course1.cloudstorage.service.NoteService;
 import com.udacity.jwdnd.course1.cloudstorage.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -13,17 +16,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/home")
 public class HomeController {
-    private UserService userService;
-    private NoteService noteService;
+    private final CredentialService credentialService;
+    private final EncryptionService encryptionService;
+    private final NoteService noteService;
+    private final UserService userService;
 
-    public HomeController(UserService userService, NoteService noteService) {
-        this.userService = userService;
+    public HomeController(EncryptionService encryptionService, CredentialService credentialService, NoteService noteService, UserService userService) {
+        this.credentialService = credentialService;
+        this.encryptionService = encryptionService;
         this.noteService = noteService;
+        this.userService = userService;
     }
 
     @GetMapping
-    public String getHomePage(Authentication authentication, Note note, Model model) {
+    public String getHomePage(Authentication authentication, Credential credential, Note note, Model model) {
         User user = userService.getUser(authentication.getName());
+        model.addAttribute("credentials", credentialService.getCredentials(user.getUserId()));
+        model.addAttribute("encryptionService", encryptionService);
         model.addAttribute("notes", noteService.getNotes(user.getUserId()));
         return "home";
     }

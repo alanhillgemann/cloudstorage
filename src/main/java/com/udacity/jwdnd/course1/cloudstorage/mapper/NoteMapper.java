@@ -22,11 +22,11 @@ public interface NoteMapper {
 
     @Insert("INSERT INTO NOTES (notetitle, notedescription, userid) VALUES(#{noteTitle}, #{noteDescription}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "noteId")
-    int insert(Note note);
+    void insert(Note note);
 
     @Update("UPDATE NOTES set notetitle = #{noteTitle}, notedescription = #{noteDescription}, userid = #{userId} WHERE noteid = #{noteId}")
-    int update(Note note);
+    void update(Note note);
 
     @Delete("DELETE NOTES WHERE noteid = #{noteId}")
-    int delete(Integer noteId);
+    void delete(Integer noteId);
 }

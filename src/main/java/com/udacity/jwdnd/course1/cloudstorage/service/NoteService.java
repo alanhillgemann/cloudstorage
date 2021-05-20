@@ -22,11 +22,9 @@ public class NoteService {
         return noteMapper.getNote(noteId);
     }
 
-    public Integer createNote(Note note) {
-        return noteMapper.insert(new Note(null, note.getNoteTitle(), note.getNoteDescription(), note.getUserId()));
-    }
+    public void createNote(Note note) { noteMapper.insert(new Note(null, note.getNoteTitle(), note.getNoteDescription(), note.getUserId())); }
 
-    public Integer updateNote(Note note) { return noteMapper.update(note); }
+    public void updateNote(Note note) { noteMapper.update(note); }
 
-    public Integer deleteNote(Integer noteId) { return noteMapper.delete(noteId); }
+    public void deleteNote(Integer noteId) { noteMapper.delete(noteId); }
 }
