@@ -26,7 +26,7 @@ public class CredentialService {
         return credentialMapper.getCredential(credentialId);
     }
 
-    public void createCredential(Credential credential) {
+    public Integer createCredential(Credential credential, Integer userId) {
         SecureRandom random = new SecureRandom();
         byte[] key = new byte[16];
         random.nextBytes(key);
@@ -34,10 +34,13 @@ public class CredentialService {
         String encodedPassword = encryptionService.encryptValue(credential.getPassword(), encodedKey);
         credential.setKey(encodedKey);
         credential.setPassword(encodedPassword);
-        credentialMapper.insert(new Credential(null, credential.getUrl(), credential.getUsername(), credential.getKey(), credential.getPassword(), credential.getUserId()));
+        credential.setUserId(userId);
+        Credential newCredential = new Credential(null, credential.getUrl(), credential.getUsername(), credential.getKey(), credential.getPassword(), credential.getUserId());
+        credentialMapper.insert(newCredential);
+        return newCredential.getCredentialId();
     }
 
-    public void updateCredential(Credential credential) {
+    public void updateCredential(Credential credential, Integer userId) {
         SecureRandom random = new SecureRandom();
         byte[] key = new byte[16];
         random.nextBytes(key);
@@ -45,6 +48,7 @@ public class CredentialService {
         String encodedPassword = encryptionService.encryptValue(credential.getPassword(), encodedKey);
         credential.setKey(encodedKey);
         credential.setPassword(encodedPassword);
+        credential.setUserId(userId);
         credentialMapper.update(credential);
     }
 

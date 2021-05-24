@@ -16,11 +16,11 @@ public interface CredentialMapper {
             @Result(property = "userId", column = "userid")
     })
     @Select("SELECT * FROM CREDENTIALS WHERE userid = #{userId}")
-    ArrayList<Credential> getCredentials(int credentialId);
+    ArrayList<Credential> getCredentials(Integer userId);
 
     @ResultMap("credentialResultMap")
     @Select("SELECT * FROM CREDENTIALS WHERE credentialid = #{credentialId}")
-    Credential getCredential(int credentialId);
+    Credential getCredential(Integer credentialId);
 
     @Insert("INSERT INTO CREDENTIALS (url, username, key, password, userid) VALUES(#{url}, #{username}, #{key}, #{password}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "credentialId")

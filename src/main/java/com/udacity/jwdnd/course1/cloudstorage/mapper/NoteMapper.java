@@ -14,11 +14,11 @@ public interface NoteMapper {
             @Result(property = "userId", column = "userid")
     })
     @Select("SELECT * FROM NOTES WHERE userid = #{userId}")
-    ArrayList<Note> getNotes(int noteId);
+    ArrayList<Note> getNotes(Integer userId);
 
     @ResultMap("noteResultMap")
     @Select("SELECT * FROM NOTES WHERE noteid = #{noteId}")
-    Note getNote(int noteId);
+    Note getNote(Integer noteId);
 
     @Insert("INSERT INTO NOTES (notetitle, notedescription, userid) VALUES(#{noteTitle}, #{noteDescription}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "noteId")
