@@ -14,14 +14,6 @@ public class FileService {
 
     public FileService(FileMapper fileMapper) { this.fileMapper = fileMapper; }
 
-    public boolean isFilenameAvailable(String username, Integer userId) {
-        return fileMapper.getFileByName(username, userId) == null;
-    }
-
-    public ArrayList<File> getFiles(Integer userId) { return fileMapper.getFiles(userId); }
-
-    public File getFile(Integer fileId) { return fileMapper.getFileById(fileId); }
-
     public Integer createFile(MultipartFile file, Integer userId) throws IOException {
         File newFile = new File();
         newFile.setFilename(file.getOriginalFilename());
@@ -34,4 +26,12 @@ public class FileService {
     }
 
     public void deleteFile(Integer fileId) { fileMapper.delete(fileId); }
+
+    public File getFile(Integer fileId) { return fileMapper.getFileById(fileId); }
+
+    public ArrayList<File> getFiles(Integer userId) { return fileMapper.getFiles(userId); }
+
+    public boolean isFilenameAvailable(String username, Integer userId) {
+        return fileMapper.getFileByName(username, userId) == null;
+    }
 }

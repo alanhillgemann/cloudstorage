@@ -10,11 +10,11 @@
     </head>
     <body class="p-3 mb-2 bg-light text-black">
         <div class="container justify-content-center w-50 p-3" style="margin-top: 5em;">
-            <div class="alert alert-success fill-parent" th:if="${result}">
+            <div class="alert alert-success fill-parent" id="success-alert" th:if="${result}">
                 <h1 class="display-5">Success</h1>
                 <span>Your changes were successfully saved. Click <a class="home-link" href="/home">here</a> to continue.</span>
             </div>
-            <div class="alert alert-danger fill-parent" th:unless="${result}">
+            <div class="alert alert-danger fill-parent" id="error-alert" th:unless="${result}">
                 <h1 class="display-5">Error</h1>
                 <span>Your changes were not saved. Click <a class="home-link" href="/home">here</a> to continue.</span>
             </div>

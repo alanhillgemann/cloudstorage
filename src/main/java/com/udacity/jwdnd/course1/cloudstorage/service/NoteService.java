@@ -14,24 +14,24 @@ public class NoteService {
         this.noteMapper = noteMapper;
     }
 
-    public ArrayList<Note> getNotes(Integer userId) {
-        return noteMapper.getNotes(userId);
-    }
-
-    public Note getNote(Integer noteId) {
-        return noteMapper.getNote(noteId);
-    }
-
     public Integer createNote(Note note, Integer userId) {
         Note newNote = new Note(null, note.getNoteTitle(), note.getNoteDescription(), userId);
         noteMapper.insert(newNote);
         return newNote.getNoteId();
     }
 
+    public void deleteNote(Integer noteId) { noteMapper.delete(noteId); }
+
+    public Note getNote(Integer noteId) {
+        return noteMapper.getNote(noteId);
+    }
+
+    public ArrayList<Note> getNotes(Integer userId) {
+        return noteMapper.getNotes(userId);
+    }
+
     public void updateNote(Note note, Integer userId) {
         note.setUserId(userId);
         noteMapper.update(note);
     }
-
-    public void deleteNote(Integer noteId) { noteMapper.delete(noteId); }
 }

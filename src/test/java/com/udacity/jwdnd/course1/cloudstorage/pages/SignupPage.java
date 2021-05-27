@@ -13,21 +13,25 @@ public class SignupPage extends BasePage {
     @FindBy(id = "inputLastName")
     private WebElement lastNameField;
 
-    @FindBy(id = "inputUsername")
-    private WebElement usernameField;
-
     @FindBy(id = "inputPassword")
     private WebElement passwordField;
 
-    @FindBy(id = "submit-button")
-    private WebElement submitButton;
+    @FindBy(id = "inputUsername")
+    private WebElement usernameField;
 
     @FindBy(id = "login-link")
     private WebElement loginLink;
 
+    @FindBy(id = "submit-button")
+    private WebElement submitButton;
+
     public SignupPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+    }
+
+    public void login() {
+        click(loginLink);
     }
 
     public void signup(String firstName, String lastName, String username, String password) {
@@ -36,9 +40,5 @@ public class SignupPage extends BasePage {
         sendKeys(usernameField, username);
         sendKeys(passwordField, password);
         click(submitButton);
-    }
-
-    public void login() {
-        click(loginLink);
     }
 }

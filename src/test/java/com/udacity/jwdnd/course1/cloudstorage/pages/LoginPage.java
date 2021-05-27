@@ -7,11 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(id = "inputUsername")
-    private WebElement usernameField;
-
     @FindBy(id = "inputPassword")
     private WebElement passwordField;
+
+    @FindBy(id = "inputUsername")
+    private WebElement usernameField;
 
     @FindBy(id = "submit-button")
     private WebElement submitButton;

@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 @Mapper
 public interface CredentialMapper {
+
+    @Delete("DELETE CREDENTIALS WHERE credentialid = #{credentialId}")
+    void delete(Integer credentialId);
+
     @Results(id = "credentialResultMap", value = {
             @Result(property = "credentialId", column = "credentialid"),
             @Result(property = "url", column = "url"),
@@ -15,20 +19,19 @@ public interface CredentialMapper {
             @Result(property = "password", column = "password"),
             @Result(property = "userId", column = "userid")
     })
-    @Select("SELECT * FROM CREDENTIALS WHERE userid = #{userId}")
-    ArrayList<Credential> getCredentials(Integer userId);
-
-    @ResultMap("credentialResultMap")
     @Select("SELECT * FROM CREDENTIALS WHERE credentialid = #{credentialId}")
     Credential getCredential(Integer credentialId);
 
-    @Insert("INSERT INTO CREDENTIALS (url, username, key, password, userid) VALUES(#{url}, #{username}, #{key}, #{password}, #{userId})")
+    @ResultMap("credentialResultMap")
+    @Select("SELECT * FROM CREDENTIALS WHERE userid = #{userId}")
+    ArrayList<Credential> getCredentials(Integer userId);
+
+    @Insert("INSERT INTO CREDENTIALS (url, username, key, password, userid) " +
+            "VALUES(#{url}, #{username}, #{key}, #{password}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "credentialId")
     void insert(Credential credential);
 
-    @Update("UPDATE CREDENTIALS set url = #{url}, username = #{username}, key = #{key}, password = #{password}, userid = #{userId} WHERE credentialid = #{credentialId}")
+    @Update("UPDATE CREDENTIALS set url = #{url}, username = #{username}, key = #{key}, password = #{password}, userid = #{userId} " +
+            "WHERE credentialid = #{credentialId}")
     void update(Credential credential);
-
-    @Delete("DELETE CREDENTIALS WHERE credentialid = #{credentialId}")
-    void delete(Integer credentialId);
 }

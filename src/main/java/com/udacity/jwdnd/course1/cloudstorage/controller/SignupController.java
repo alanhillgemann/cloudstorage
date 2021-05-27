@@ -28,8 +28,8 @@ public class SignupController {
 
     @PostMapping()
     public String signupUser(@ModelAttribute User user, Model model) {
-        String signupError = null;
-        Integer userId = null;
+        String signupError;
+        Integer userId;
         try {
             if (!userService.isUsernameAvailable(user.getUsername())) {
                 signupError = "The username already exists.";
