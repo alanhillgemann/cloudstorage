@@ -19,19 +19,12 @@ public class SignupPage extends BasePage {
     @FindBy(id = "inputUsername")
     private WebElement usernameField;
 
-    @FindBy(id = "login-link")
-    private WebElement loginLink;
-
     @FindBy(id = "submit-button")
     private WebElement submitButton;
 
     public SignupPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-    }
-
-    public void login() {
-        click(loginLink);
     }
 
     public void signup(String firstName, String lastName, String username, String password) {

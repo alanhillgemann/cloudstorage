@@ -5,10 +5,7 @@ import com.udacity.jwdnd.course1.cloudstorage.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller()
@@ -37,7 +34,7 @@ public class SignupController {
             } else {
                 userId = userService.createUser(user);
                 log.info("User {} created for {}", userId, user.getUsername());
-                model.addAttribute("signupSuccess", true);
+                return "redirect:/login?signup";
             }
         } catch (Exception e) {
             signupError = "There was an error signing you up. Please try again.";
